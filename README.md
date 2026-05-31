@@ -130,6 +130,7 @@ pnpm preview
 
 - 🎉 基于 [imsyy/home](https://github.com/imsyy/home) 首次发布
 - ☁ **新增小米天气 API**，5 源天气自动轮换
+- 🎵 **修复音乐播放**，Meting API 更换为 api.injahow.cn 公共接口
 - 🔧 **新增可视化管理面板**（Ctrl+Shift+E）
 - 🔐 **管理面板密码认证**（默认 `admin`，SHA-256 存储）
 - 🔗 社交链接 / 网站链接可视化编辑 + 拖拽排序
