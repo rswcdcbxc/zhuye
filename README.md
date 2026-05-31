@@ -1,248 +1,223 @@
-简体中文 | [English](./README_EN.md)
+> [!NOTE]
+> 本项目 Fork 自 [imsyy/home](https://github.com/imsyy/home)，在此基础上新增了可视化管理面板、小米天气 API 集成、多源天气自动轮换等功能。感谢原作者的优秀作品。
 
-> [!IMPORTANT]
-> ## 致大家
-> 此项目最初只是一个简单的主页。然而，随着越来越多的小伙伴发现了这个项目，它受到了大量本不应有的关注。而且，此项目作为初学前端的作品，其代码相当杂乱且质量低下。此外，该项目还遭到众多不明资源站或下载站的倒卖，致使许多不明真相的购买者从源代码中找到本人的联系方式进行问题咨询或提出功能需求。由于目前个人原因，该仓库进行存档，敬请谅解！
-
-<p>
-<strong><h2>無名の主页</h2></strong>
-简单的小主页，原来的看够了，重新弄了一个
+<p align="center">
+  <strong><h2>🏠 个人主页</h2></strong>
+  简约的个人导航主页，支持天气、音乐、一言、时光进度条
 </p>
 
-![無名の主页](/screenshots/main.jpg)
+![主页截图](screenshots/main.jpg)
 
-> 主页的 Logo 字体已经过压缩，若用本站 Logo 以外的字母会变回默认字体，这里是 [完整字体](https://file.imsyy.top/font/Other/Pacifico-Regular.ttf)，若无法下载，可将字体目录下的 `Pacifico-Regular-all.ttf` 进行替换
+> 基于 [imsyy/home](https://github.com/imsyy/home) 二次开发，新增可视化管理面板、多源天气自动轮换等功能。
 
-### 👀 Demo
+---
 
-> 由于 CDN 缓存原因，查看最新效果可能需要 `Ctrl` + `F5` 强制刷新浏览器缓存
-
-- [無名の主页](https://www.imsyy.top)
-- [無名の主页 - Dev](https://home-imsyy.vercel.app)
-- [無名の主页 - 备用线路](https://home-5iw.pages.dev)
-
-### 🎉 功能
+## ✨ 功能
 
 - [x] 载入动画
-- [x] 站点简介
-- [x] Hitokoto 一言
-- [x] 日期及时间
-- [x] 实时天气
-- [x] 时光进度条
-- [x] 音乐播放器
-- [x] 移动端适配
+- [x] 站点简介 / Hitokoto 一言
+- [x] 日期及时间 / 时光进度条
+- [x] **实时天气 — 5 源自动轮换**（小米 / 高德 / Open-Meteo / wttr.in）
+- [x] 音乐播放器（网易云 / QQ 音乐）
+- [x] **可视化管理面板**（Ctrl+Shift+E 打开，首次密码 `admin`）
+- [x] 移动端适配 / PWA 离线缓存
 
-### ⚙️ 自动部署
+---
 
-如果遇到构建环境或者打包过程出现错误，则可以采用 `Github Actions` 来进行自动构建
+## 🚀 快速开始
 
-- 在成功 `fork` 仓库后，前往 `Actions` 页面，若您是首次开启，则会出现下面的提示，点击开启
+### 环境要求
 
-  ![步骤1](/screenshots/step1.jpg)
-
-- 然后在仓库中进行任意修改后均会触发工作流的运行，在工作流完成后，会在下方生成一个可供下载的压缩包，这就是构建出的静态文件，可自行上传至服务器
-
-  ![步骤2](/screenshots/step2.jpg)
-
-### ⚙️ 手动部署
-
-- **安装** [node.js](https://nodejs.org/zh-cn/) **环境**
-
-  > node > 16.16.0  
-  > npm > 8.15.0
-
-- 然后以 **管理员权限** 运行 `cmd` 终端，并 `cd` 到 项目根目录
-- 在 `终端` 中输入：
+> Node.js > 16.16.0  
+> pnpm > 8.x
 
 ```bash
-# 安装 pnpm
-npm install -g pnpm
+# 1. 克隆项目
+git clone https://github.com/rswcdcbxc/zhuye.git
+cd zhuye
 
-# 安装依赖
+# 2. 配置环境变量
+cp .env.example .env
+# 编辑 .env 按需修改站点名称、音乐歌单等
+
+# 3. 安装依赖
 pnpm install
 
-# 预览
+# 4. 开发预览
 pnpm dev
 
-# 构建
+# 5. 生产构建
 pnpm build
 ```
 
-> 构建完成后，静态资源会在 **`dist` 目录** 中生成，可将 **`dist` 文件夹下的文件**上传至服务器，也可使用 `Vercel` 等托管平台一键导入并自动部署
+构建产物在 `dist/` 目录，上传到任意静态服务器即可。
 
-### ⚙️ Docker 部署
-
-> 安装及配置 Docker 将不在此处说明，请自行解决
+### Docker 部署
 
 ```bash
-# 构建
 docker build -t home .
-# 运行
 docker run -p 12445:12445 -d home
 ```
 
-### ⚙️ Vercel 部署
+### 🪟 Windows 部署（Node.js）
 
-> 其他部署平台大致相同，在此不做说明
+```powershell
+# 1. 安装 Node.js（如已安装可跳过）
+# 前往 https://nodejs.org 下载 LTS 版本并安装
 
-1. 点击本仓库右上角的 `Fork`，复制本仓库到你的 `GitHub` 账号
-2. 复制 `/.env.example` 文件并重命名为 `/.env`（ 重要 ）
-3. 按需修改 `/.env` 文件中的配置
-4. 点击 `Deploy`，即可成功部署
+# 2. 克隆项目
+git clone https://github.com/rswcdcbxc/zhuye.git
+cd zhuye
 
-### 网站链接
+# 3. 配置环境变量
+copy .env.example .env
+# 编辑 .env 按需修改站点名称、音乐歌单等
 
-在 `src/assets/siteLinks.json` 中可以自定义网站链接（以指向自己的网站）:
+# 4. 安装 pnpm
+npm install -g pnpm
 
-```json
-{
-  "icon": "Blog",
-  "name": "博客",
-  "link": "https://blog.imsyy.top/"
-},
+# 5. 安装依赖
+pnpm install
+
+# 6. 开发模式运行（支持热更新）
+pnpm dev
+
+# 或者构建后预览
+pnpm build
+pnpm preview
 ```
 
-其中 `icon` 网站链接的图标可以在 `src/components/Links/index.vue` 中添加:
+> `pnpm dev` 启动开发服务器，默认 http://localhost:3000  
+> `pnpm build && pnpm preview` 构建生产版本并预览，默认 http://localhost:4173
 
-```js
-// 可前往 https://www.xicons.org 自行挑选并在此处引入
-// 此处引入的是 fa 类型
-import {
-  Link,
-  Blog,
-  CompactDisc,
-  Cloud,
-  Compass,
-  Book,
-  Fire,
-  LaptopCode,
-} from "@vicons/fa";
-
-...
-
-// 网站链接图标
-const siteIcon = {
-  Blog,
-  Cloud,
-  CompactDisc,
-  Compass,
-  Book,
-  Fire,
-  LaptopCode,
-};
-```
-
-### 社交链接
-
-在 `src/assets/socialLinks.json` 中可以自定义社交链接。
-
-### 天气
-
-天气及地区获取需要 `高德开放平台` 相关 API
-
-- 前往 [高德开放平台控制台](https://console.amap.com/dev/index) 创建一个 `Web 服务` 类型的 `Key`，并将 `Key` 填入 `.env` 中的 `VITE_WEATHER_KEY` 中
-
-也可自行更换其他方式
-
-### 音乐
-
-> 本项目采用了基于 `MetingJS` 的 `Aplayer` 音乐播放器，可实现快速自定义歌单  
-> \*仅支持 **中国大陆地区**
-
-请在 `.env` 文件中更改歌曲相关参数即可实现自定义歌单列表
+### 🐧 Linux 部署（Node.js）
 
 ```bash
-# 歌曲 API 地址
-VITE_SONG_API = "https://api-meting.imsyy.top"
-# 歌曲服务器 ( netease-网易云, tencent-qq音乐 )
-VITE_SONG_SERVER = "netease"
-# 播放类型 ( song-歌曲, playlist-播放列表, album-专辑, search-搜索, artist-艺术家 )
-VITE_SONG_TYPE = "playlist"
-# 播放 ID
-VITE_SONG_ID = "7452421335"
+# 1. 安装 Node.js（如已安装可跳过）
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# 2. 克隆项目
+git clone https://github.com/rswcdcbxc/zhuye.git
+cd zhuye
+
+# 3. 配置环境变量
+cp .env.example .env
+# 编辑 .env 按需修改站点名称、音乐歌单等
+
+# 4. 安装 pnpm
+npm install -g pnpm
+
+# 5. 安装依赖
+pnpm install
+
+# 6. 开发模式运行（支持热更新）
+pnpm dev
+
+# 或者构建后预览
+pnpm build
+pnpm preview
 ```
 
-### 字体
+> `pnpm dev` 启动开发服务器，默认 http://localhost:3000  
+> `pnpm build && pnpm preview` 构建生产版本并预览，默认 http://localhost:4173
 
-现采用 `HarmonyOS Sans` 开源字体，采用字体拆分，提升加载速度
+---
 
-> 由于本站 `CDN` 已开启防盗链，**非本站域名不可访问**，请将字体引入链接更改为下方内容，否则 **自定义字体将失效**
->
-> `https://s1.hdslb.com/bfs/static/jinkela/long/font/regular.css`
+## 📋 更新日志
 
-<details>
-<summary>旧版方式</summary>
+### v1.0 (2026-05-31)
 
-> 由于本项目引入了中文字体，需要压缩中文字体以提高网页加载速度（ 也可以取消使用中文字体 ）
+- 🎉 基于 [imsyy/home](https://github.com/imsyy/home) 首次发布
+- ☁ **新增小米天气 API**，5 源天气自动轮换
+- 🔧 **新增可视化管理面板**（Ctrl+Shift+E）
+- 🔐 **管理面板密码认证**（默认 `admin`，SHA-256 存储）
+- 🔗 社交链接 / 网站链接可视化编辑 + 拖拽排序
+- 📝 站点信息在线编辑（名称/作者/简介/备案号）
+- 📥 JSON 配置导入导出
+- 🎨 管理面板毛玻璃风格适配
 
-#### 中文字体去除繁体
+---
 
-- 安装 `Python 3.7` 和 `pip`
-- 运行 `pip install fonttools`
-- 下载 [sc_unicode.txt](https://gist.githubusercontent.com/imaegoo/d64e5088b723c2e02c40985f55ff12db/raw/5ebd2ce49418c73459a9dfe050483409306a6c1d/sc_unicode.txt)
-- 运行 `pyftsubset 字体名称.ttf --unicodes-file=sc_unicode.txt`
+## 🔧 可视化管理面板
 
-#### 字体进一步压缩
+![管理面板](screenshots/admin.png)
 
-- 编译安装 `Google woff2`
+> **🔐 首次密码：`admin`**（登录后可在「修改密码」标签中更改）
+
+**无需改代码即可修改联系方式、网站链接、站点信息！**
+
+| 入口 | 操作 |
+| --- | --- |
+| 快捷键 | `Ctrl + Shift + E` |
+| 页脚图标 | 鼠标悬停页脚右侧齿轮 |
+
+| 功能 | 说明 |
+| --- | --- |
+| 🔗 社交链接 | 增删改 GitHub/B站/QQ/Email 等，支持拖拽排序 |
+| 🌐 网站链接 | 增删改博客/网盘等快捷链接，下拉选择图标 |
+| 📝 站点信息 | 改站点名称、作者、简介、备案号、欢迎语 |
+| 🔑 修改密码 | 面板内修改认证密码（默认 `admin`） |
+| 📥 导出 JSON | 下载配置备份 |
+| 📤 导入 JSON | 从文件恢复配置 |
+
+> 配置保存在浏览器 localStorage，刷新不丢失。导出 JSON 可放入仓库永久部署。
+
+---
+
+## ☁ 天气系统
+
+![天气](screenshots/weather.png)
+
+5 层天气源自动轮换，一个失效自动切换下一个：
+
+| 优先级 | 来源 | 说明 |
+| --- | --- | --- |
+| 1 | **小米天气** | 免费，数据最全（实时温度/体感/AQI/分钟降水/15天预报） |
+| 2 | 高德天气 | 需配置 `VITE_WEATHER_KEY` |
+| 3 | Open-Meteo | 免费，全球覆盖 |
+| 4 | wttr.in | 免费，IP 自动定位 |
+| 5 | 教书先生 | 旧备用 |
+
+> 无需配置任何 Key 即可使用（默认走小米天气）。
+
+---
+
+## 🎵 音乐
+
+在 `.env` 中配置：
 
 ```bash
-sudo apt-get install -y git g++ make
-git clone --recursive https://github.com/google/woff2.git
-cd woff2
-make clean all
+VITE_SONG_API = "https://api.injahow.cn/meting/"  # Meting API 地址
+VITE_SONG_SERVER = "netease"   # netease / tencent
+VITE_SONG_TYPE = "playlist"    # song / playlist / album
+VITE_SONG_ID = "7452421335"    # 歌单 ID
 ```
 
-- 再压缩字体
+---
 
-```
-./woff2_compress ./字体名称.ttf
-```
+## 🛠 技术栈
 
-- 最终可对原字体进行缓加载，**先行加载压缩后的字体**
+- Vue 3 + Vite 4
+- Pinia（状态管理 + localStorage 持久化）
+- Element Plus / IconPark / xicons
+- Aplayer 音乐播放器
+- Swiper 轮播
+- PWA 离线支持
 
-> 详细信息可前往 [虹墨空间站](https://www.imaegoo.com/2020/chinese-font-compress/) 查看原文
+---
 
-</details>
+## 📡 API 来源
 
-### 网站图标及网站背景
+| 用途 | API |
+| --- | --- |
+| 天气 | 小米天气 / 高德开放平台 / Open-Meteo / wttr.in |
+| 一言 | Hitokoto |
+| IP 定位 | ip-api.com |
+| 音乐 | Meting API |
 
-#### 网站背景
+---
 
-可以在 `public/images` 中修改网站背景
+## 📄 License
 
-如果想要添加更多的本地图片作为网站背景，可以将图片重命名 `background+数字` 的形式，并在 `src/components/Background/index.vue` 中进行修改：
-
-```js
-if (type == 0) {
-  // 修改此处 Math.random() 后面的第一个数字为图片的数量
-  bgUrl.value = `/images/background${Math.floor(Math.random() * 10 + 1)}.webp`;
-}
-```
-
-#### 网站图标
-
-可以在 `public/images/icon` 中修改网站图标。
-
-### 技术栈
-
-- [Vue](https://cn.vuejs.org/)
-- [Vite](https://vitejs.cn/vite3-cn/)
-- [Pinia](https://pinia.vuejs.org/zh/)
-- [IconPark](https://iconpark.oceanengine.com/official)
-- [xicons](https://xicons.org/)
-- [Aplayer](https://aplayer.js.org/)
-
-### API
-
-- [韩小韩 WebAPI 接口](https://api.vvhan.com/)
-- [搏天 API](https://api.btstu.cn/doc/sjbz.php)
-- [教书先生 API](https://api.oioweb.cn/doc/weather/GetWeather)
-- [高德开放平台](https://lbs.amap.com/)
-- [Hitokoto 一言](https://hitokoto.cn/)
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=imsyy/home&type=Date)](https://star-history.com/#imsyy/home&Date)
-
-<a title="SSL" target="_blank" href="https://myssl.com/seal/detail?domain=blog.imsyy.top"><img src="https://img.shields.io/badge/MySSL-安全认证-brightgreen"></a>&nbsp;<a title="CDN" target="_blank" href="https://cdnjs.com/"><img src="https://img.shields.io/badge/CDN-Cloudflare-blue"></a>&nbsp;<a title="Copyright" target="_blank" href="https://imsyy.top/"><img src="https://img.shields.io/badge/Copyright%20%C2%A9%202020--2023-%E7%84%A1%E5%90%8D-red"></a>
+基于 [imsyy/home](https://github.com/imsyy/home) 修改，遵循原项目许可证。
